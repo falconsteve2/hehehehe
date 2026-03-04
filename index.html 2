@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me & My Games</title>
+    <!-- Embed Happy Monkey font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Happy+Monkey&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Happy Monkey', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* Cool animated gradient background */
+            background: linear-gradient(-45deg, #1a1a1a, #005678, #101032, #0f2027, #1c92d2, #0f2027, #232526, #24243e);
+            background-size: 400% 400%;
+            animation: gradientBG 18s ease infinite;
+            color: white;
+        }
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            25% {background-position: 50% 100%;}
+            50% {background-position: 100% 50%;}
+            75% {background-position: 50% 0%;}
+            100% {background-position: 0% 50%;}
+        }
+        main, header, footer {
+            background: rgba(30, 30, 40, 0.80);
+            border-radius: 16px;
+            box-shadow: 0 4px 32px 0 rgba(0,0,0,0.25);
+            backdrop-filter: blur(2px);
+        }
+        header {
+            background-color: rgba(51,51,51,0.90);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            margin: 0 0 1rem 0;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 16px rgba(0,170,255,0.3);
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        h1, h2 {
+            color: #fff;
+            text-shadow: 0 2px 10px #00aaff88, 0 0px 2px #000;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 0.5rem 0;
+        }
+        ul li a {
+            color: #00aaff;
+            text-decoration: none;
+            transition: color 0.2s, text-shadow 0.2s;
+            text-shadow: 0 0 8px #00aaff55;
+        }
+        ul li a:hover {
+            color: #fff;
+            text-shadow: 0 0 16px #00fff7, 0 0 4px #00aaff;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: rgba(51,51,51,0.90);
+            color: white;
+            margin-top: 2rem;
+        }
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Stars Canvas -->
+    <canvas class="stars"></canvas>
+
+    <header>
+        <!-- Updated logo image to fontbolt.png -->
+        <img src="fontbolt.png" alt="Logo" class="logo">
+        <h1>Welcome to My Website Portfolio</h1>
+    </header>
+    <main>
+        <section id="about-me">
+            <h2>About Me</h2>
+            <p>Hi, I'm ALPHA-JR1890! I'm passionate about creating fun and engaging games. I enjoy coding and designing in html. Feel free to explore my projects. </p>
+        </section>
+        <section id="game-websites">
+            <h2> My Game Websites</h2>
+            <ul>
+                <li><a href="https://Alpha-jr1890.github.io/Flash" target="_blank">Flash</a></li>
+                <li><a href="https://alpha-jr1890.github.io/galaxy" target="_blank">Galaxy</a></li>
+                <li><a href="https://Alpha-jr1890.github.io/monkeygames" target="_blank">Monkey Games</a></li>
+                <li><a href="https://Alpha-jr1890.github.io/Dream" target="_blank">Dream</a></li>
+                <li><a href="https://sites.google.com/learner.dvusd.org/bftr" target="_blank">Battle for the realms</a></li>
+                <li><a href="https://alphajr1890.netlify.app/" target="_blank">Doggo</a></li>
+                <li><a href="https://ALPHA-jr1890.github.io/GBA" target="_blank">GBA</a></li>
+                <li><a href="https://bio.link/alpha_jr" target="_blank">Quick links</a></li>
+            </ul>
+        </section> 
+        <h2> other Game Websites</h2>
+        <ul>
+            <li><a href=""</li>
+        </ul>
+    </main>
+    <footer>
+        <p>&copy; 2025 ALPHA-JR1890. All Rights Reserved.</p>
+    </footer>
+    <script>
+    // Animated stars background
+    const canvas = document.querySelector('.stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [], w, h, dpr = window.devicePixelRatio || 1;
+
+    function resize() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+        stars = [];
+        for (let i = 0; i < 120; i++) {
+            stars.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: Math.random() * 1.2 + 0.2,
+                a: Math.random() * 360,
+                s: Math.random() * 0.4 + 0.05
+            });
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (let star of stars) {
+            ctx.save();
+            ctx.globalAlpha = 0.7 + 0.3 * Math.sin(Date.now()/300 + star.a);
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+            ctx.fillStyle = "#fff";
+            ctx.shadowColor = "#00aaff";
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.restore();
+            // twinkle
+            star.a += star.s;
+            // move a tiny bit
+            star.x += 0.02 * (Math.random() - 0.5);
+            star.y += 0.02 * (Math.random() - 0.5);
+            // wrap around
+            if (star.x < 0) star.x = w;
+            if (star.x > w) star.x = 0;
+            if (star.y < 0) star.y = h;
+            if (star.y > h) star.y = 0;
+        }
+        requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+    </script>
+</body>
+</html>
